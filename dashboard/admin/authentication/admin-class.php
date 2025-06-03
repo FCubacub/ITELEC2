@@ -109,7 +109,7 @@ class Admin
                 </html>";
 
                 $this->send_email($email, $message, $subject, $this->smtp_email, $this->smtp_password);
-                echo "<script>alert('We sent the OTP to $email. Your OTP is: $otp'); window.location.href='../../../verify-otp.php';</script>";
+                echo "<script>alert('We sent the OTP to $email.'); window.location.href='../../../verify-otp.php';</script>";
             }
         }
     }

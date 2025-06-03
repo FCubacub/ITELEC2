@@ -3,7 +3,7 @@ include_once 'config/setting-configuration.php';
 
 // Check if user is already logged in
 if (isset($_SESSION['adminSession'])) {
-    header("Location: dashboard/admin/");
+    header("Location: dashboard/admin/index.php");
     exit;
 }
 ?>
@@ -13,15 +13,16 @@ if (isset($_SESSION['adminSession'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Sign Up</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             background-color: #f8f9fa;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
+            padding: 2rem 0;
         }
         .auth-card {
             background: white;
@@ -46,8 +47,8 @@ if (isset($_SESSION['adminSession'])) {
         .form-label {
             font-weight: 500;
         }
-        .forgot-link {
-            font-size: 0.875rem;
+        .form-text {
+            font-size: 0.75rem;
         }
     </style>
 </head>
@@ -56,14 +57,17 @@ if (isset($_SESSION['adminSession'])) {
         <div class="row justify-content-center">
             <div class="col-md-5 col-lg-4">
                 <div class="auth-card p-4">
-                    <h2 class="text-center mb-4">Login</h2>
-                    
+                    <h2 class="text-center mb-4">Create Account</h2>
+
                     <form method="post" action="dashboard/admin/authentication/admin-class.php">
-                        <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" required value="<?php echo isset($name) ? htmlspecialchars($name) : ''; ?>">
+                        </div>
                         
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>">
                         </div>
                         
                         <div class="mb-3">
@@ -71,18 +75,19 @@ if (isset($_SESSION['adminSession'])) {
                             <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
                         </div>
                         
-                        <div class="mb-3 text-end">
-                            <a href="forgot-password.php" class="text-decoration-none forgot-link">Forgot password?</a>
-                        </div>
+                        <!-- <div class="mb-3">
+                            <label for="confirm_password" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Enter Confirm Password   " required>
+                        </div> -->
                         
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-dark" name="btn_signin">Login</button>
+                            <button type="submit" class="btn btn-dark" name="btn_signup">Create Account</button>
                         </div>
                     </form>
                     
                     <div class="auth-footer text-center">
-                        <p class="mb-0 text-muted">Don't have an account? 
-                            <a href="signup.php" class="text-decoration-none">Sign up</a>
+                        <p class="mb-0 text-muted">Already have an account? 
+                            <a href="index.php" class="text-decoration-none">Login</a>
                         </p>
                     </div>
                 </div>
